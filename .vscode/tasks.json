@@ -1,0 +1,40 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Build Panda Platformer",
+            "type": "cppbuild",
+            "command": "g++",
+            "args": [
+                "-std=c++17",
+                "-Wall",
+                "-Wextra",
+                "-Isrc",
+                "-o",
+                "panda_platformer.exe",
+                "src/main.cpp",
+                "src/game/Game.cpp",
+                "src/game/Player.cpp",
+                "src/game/Level.cpp",
+                "src/graphics/Renderer.cpp",
+                "src/input/InputManager.cpp"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Build the panda platformer game with g++"
+        },
+        {
+            "label": "Run Panda Platformer",
+            "type": "shell",
+            "command": ".\\panda_platformer.exe",
+            "group": "test",
+            "dependsOn": "Build Panda Platformer",
+            "detail": "Build and run the panda platformer game"
+        }
+    ]
+}
