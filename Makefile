@@ -1,44 +1,22 @@
 CXX = g++
-CXXFLAGS = -std=c++17 -Wall -Wextra -Isrc -I"C:/SDL2-2.32.8/include/SDL2"
-LDFLAGS = -L"C:/SDL2-2.32.8/lib" -lSDL2main -lSDL2
+CXXFLAGS = -std=c++17 -Wall -Wextra -Isrc -I"C:/SDL2-2.32.8/include"
+LDFLAGS = -L"C:/SDL2-2.32.8/lib" -lmingw32 -lSDL2main -lSDL2 -mwindows -lgdi32 -lwinmm -lshell32 -lole32 -loleaut32 -luuid -lversion -lsetupapi
 TARGET = panda_platformer.exe
-SOURCES = src/main.cpp src/game/Game.cpp src/game/Player.cpp src/game/Level.cpp src/graphics/Renderer.cpp src/input/InputManager.cpp
+SOURCES = src/main.cpp
 
-# Build the panda platformer game
+# Build the panda platformer executable
 $(TARGET): $(SOURCES)
-	@echo "Building panda platformer..."
-	$(CXX) $(CXXFLAGS) -o $(TARGET) $(SOURCES) $(LDFLAGS)
-	@echo "Panda platformer built successfully!"
+	$(CXX) $(CXXFLAGS) $(SOURCES) -o $(TARGET) $(LDFLAGS)
 
-# Clean up compiled panda game files
+# Clean up compiled files
 clean:
-	@echo "Cleaning panda game files..."
+	@echo "Cleaning build files..."
 	@if exist $(TARGET) del $(TARGET)
 	@echo "Clean complete!"
 
-# Run the panda platformer game
+# Run the application
 run: $(TARGET)
-    @echo "Starting panda platformer..."
-    .\$(TARGET)
+	@echo "Starting application..."
+	.\$(TARGET)
 
-# Debug build with extra panda game debugging info
-debug: CXXFLAGS += -g -DDEBUG
-debug: $(TARGET)
-    @echo "Debug build of panda platformer complete!"
-
-# Release build optimized for panda game performance
-release: CXXFLAGS += -O2 -DNDEBUG
-release: $(TARGET)
-    @echo "Release build of panda platformer complete!"
-
-# Show help for panda platformer build commands
-help:
-    @echo "Panda Platformer Build Commands:"
-    @echo "  mingw32-make         - Build the panda game"
-    @echo "  mingw32-make run     - Build and run the panda game"
-    @echo "  mingw32-make clean   - Remove compiled panda game files"
-    @echo "  mingw32-make debug   - Build debug version with panda game info"
-    @echo "  mingw32-make release - Build optimized panda game version"
-    @echo "  mingw32-make help    - Show this help message"
-
-.PHONY: clean run debug release help
+.PHONY: clean run
